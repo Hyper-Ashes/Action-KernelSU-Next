@@ -108,9 +108,9 @@ jobs:
       - name: Build kernel
         run: |
          cd kernel_workspace
-         cd kernel_platform
+         cd kernel_platform/out/bazel/output_user_root/99234e0b067ec555efc84e928b1c8607/sandbox/processwrapper-sandbox/81/execroot/__main__/out/android14-6.1/msm-kernel
          touch .scmversion
-         cd ..
+         cd /home/runner/work/Action-KernelSU-Next/Action-KernelSU-Next/kernel_workspace
          ./kernel_platform/oplus/build/oplus_build_kernel.sh ${{ github.event.inputs.CPUD }} gki
          
       - name: Make AnyKernel3
