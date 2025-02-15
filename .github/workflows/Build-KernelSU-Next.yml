@@ -119,6 +119,8 @@ jobs:
       - name: Build kernel
         run: |
          cd kernel_workspace
+         cd OnePlusOSS
+         mkdir touch.scmversion
          ./kernel_platform/oplus/build/oplus_build_kernel.sh ${{ github.event.inputs.CPUD }} gki
          
       - name: Make AnyKernel3
