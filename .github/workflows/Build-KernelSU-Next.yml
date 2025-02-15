@@ -23,7 +23,7 @@ on:
         required: true
         default: '6.1'
       KSU_ENABLED:
-        description: "添加 KSU Next"
+        description: "添加 KSU"
         required: true
         type: boolean
         default: true
