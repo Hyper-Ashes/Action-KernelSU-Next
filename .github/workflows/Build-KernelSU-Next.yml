@@ -111,7 +111,7 @@ jobs:
         run: |
          cd kernel_workspace
          cd kernel_platform/msm-kernel
-         touch .scmversion
+         ls
          cd ..
          cd ..
          ./kernel_platform/oplus/build/oplus_build_kernel.sh ${{ github.event.inputs.CPUD }} gki
