@@ -1,4 +1,3 @@
-SUSFS_VERSION="1.5.5"
 name: Build KernelSU
 on:
   workflow_dispatch:
@@ -23,6 +22,10 @@ on:
         description: "内核版本"
         required: true
         default: '6.1'
+      SUSFS_VERSION:
+        description: "SUSFS版本"
+        required: true
+        default: '1.5.5'
       KSUNEXT_ENABLED:
         description: "添加 KSU NEXT"
         required: true
@@ -96,7 +99,7 @@ jobs:
            cp ../susfs4ksu/kernel_patches/include/linux/* ./common/include/linux/
 
            # Apply patches
-           cd ./KernelSU-Next
+           cd KernelSU-Next
            cp ../../kernel_patches/KernelSU-Next-Implement-SUSFS-v${SUSFS_VERSION}-Universal.patch ./
            patch -p1 < KernelSU-Next-Implement-SUSFS-v${SUSFS_VERSION}-Universal.patch || true
            cd ../common
