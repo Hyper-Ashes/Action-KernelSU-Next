@@ -110,10 +110,7 @@ jobs:
       - name: Build kernel
         run: |
          cd kernel_workspace
-         cd kernel_platform/msm-kernel
-         ls
-         cd ..
-         cd ..
+         sed -i '107s/-dirty//' kernel_platform/msm-kernel/scripts/setlocalversion
          ./kernel_platform/oplus/build/oplus_build_kernel.sh ${{ github.event.inputs.CPUD }} gki
          
       - name: Make AnyKernel3
