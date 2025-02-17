@@ -111,7 +111,7 @@ jobs:
         run: |
          cd kernel_workspace
          cd kernel_platform/msm-kernel/scripts/
-         sed -i '107s/-dirty//' setlocalversion
+         sed -i '$s|echo "\$res"|echo "-android14-11-o-g0f030fd56978"|' setlocalversion
          cd ..
          cd ..
          cd ..
