@@ -80,7 +80,7 @@ jobs:
       - name: Run sed and perl Commands
         run: |
           echo "Changing to configuration directory: $CONFIG..."
-          cd "$CONFIG/kernel_platform"
+          cd "kernel_workspace/kernel_platform"
           
           echo "Running sed commands..."
           
