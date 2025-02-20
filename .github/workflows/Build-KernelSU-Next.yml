@@ -88,8 +88,8 @@ jobs:
           sed -i 's/check_defconfig//' ./common/build.config.gki
           sed -i 's/-dirty//' ./common/scripts/setlocalversion
           sed -i 's/-dirty//' ./msm-kernel/scripts/setlocalversion
-          sed -i '$s|echo "\$res"|echo "\xiaodong-android14-11-o-g1132d864665d"|' ./common/scripts/setlocalversion
-          sed -i '$s|echo "\$res"|echo "\xiaodong-android14-11-o-g1132d864665d"|' ./msm-kernel/scripts/setlocalversion
+          sed -i '$s|echo "\$res"|echo "\-xiaodong-android14-11-o-g1132d864665d"|' ./common/scripts/setlocalversion
+          sed -i '$s|echo "\$res"|echo "\-xiaodong-android14-11-o-g1132d864665d"|' ./msm-kernel/scripts/setlocalversion
           sed -i "/stable_scmversion_cmd/s/-maybe//g" ./build/kernel/kleaf/impl/stamp.bzl
           
          
