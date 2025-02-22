@@ -81,7 +81,7 @@ jobs:
          cd kernel_workspace/kernel_platform
          curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/refs/heads/main/kernel/setup.sh" | bash -
          cd KernelSU
-         git revert -m 1 $(git log --grep="remove unused CONFIG guard becuase GKI kernel enable kprobe by default" --pretty=format:"%H") -n
+         
          KSU_VERSION=$(expr $(/usr/bin/git rev-list --count HEAD) "+" 10200)
          echo "KSUVER=$KSU_VERSION" >> $GITHUB_ENV
          sed -i "s/DKSU_VERSION=16/DKSU_VERSION=${KSU_VERSION}/" kernel/Makefile
