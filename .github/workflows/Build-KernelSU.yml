@@ -87,14 +87,16 @@ jobs:
           sed -i '$s|echo "\$res"|echo "\-xiaodong-android14-11-o-g1132d864665d"|' ./common/scripts/setlocalversion
           sed -i '$s|echo "\$res"|echo "\-xiaodong-android14-11-o-g1132d864665d"|' ./msm-kernel/scripts/setlocalversion
           sed -i "/stable_scmversion_cmd/s/-maybe//g" ./build/kernel/kleaf/impl/stamp.bzl
-          
+
+          # Run perl command to modify UTS_VERSION
+          perl -pi -e 's{UTS_VERSION="\$\(echo \$UTS_VERSION \$CONFIG_FLAGS \$TIMESTAMP \| cut -b -\$UTS_LEN\)"}{UTS_VERSION="#1 SMP PREEMPT Sat Apr 20 04:20:00 UTC 2024"}' ./common/scripts/mkcompile_h
+
       - name: Set up KernelSU 
         if: github.event.inputs.KSU_ENABLED == 'true'
         run: |
          cd kernel_workspace/kernel_platform
          curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/refs/heads/main/kernel/setup.sh" | bash -s v1.0.3
          cd KernelSU
-         
          KSU_VERSION=$(expr $(/usr/bin/git rev-list --count HEAD) "+" 10200)
          echo "KSUVER=$KSU_VERSION" >> $GITHUB_ENV
          sed -i "s/DKSU_VERSION=16/DKSU_VERSION=${KSU_VERSION}/" kernel/Makefile
