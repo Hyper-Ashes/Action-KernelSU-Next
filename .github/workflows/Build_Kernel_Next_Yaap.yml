@@ -77,6 +77,7 @@ jobs:
          cd kernel_oneplus_sm8650_modules_and_devicetree
          mv kernel_platform ../kernel_platform
          mv vendor ../kernel_platform
+         cd ..
          rm kernel_platform/common/android/abi_gki_protected_exports_* || echo "No protected exports!"
          rm kernel_platform/msm-kernel/android/abi_gki_protected_exports_* || echo "No protected exports!"
          sed -i 's/ -dirty//g' kernel_platform/common/scripts/setlocalversion
