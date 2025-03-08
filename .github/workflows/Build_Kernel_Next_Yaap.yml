@@ -1,5 +1,4 @@
-
-name: Build KernelSU Next Yaap
+name: Build KernelSU Next
 on:
   workflow_dispatch:
     inputs:
@@ -67,8 +66,17 @@ jobs:
       - name: Initialize repo and sync
         run: |
          mkdir kernel_workspace && cd kernel_workspace
-         repo init -u https://github.com/userxiaoge/kernel_manifest.git -b refs/heads/oneplus/${{ github.event.inputs.CPU }} -m ${{ github.event.inputs.FEIL }}.xml --depth=1
+         repo init -u https://github.com/OnePlusOSS/kernel_manifest.git -b refs/heads/oneplus/${{ github.event.inputs.CPU }} -m ${{ github.event.inputs.FEIL }}.xml --depth=1
          repo sync
+         cd kernel_platform
+         rm -r msm-kernel
+         git clone https://github.com/yaap/kernel_oneplus_sm8650.git
+         mv kernel_oneplus_sm8650 msm-kernel
+         cd ..
+         git clone https://github.com/yaap/kernel_oneplus_sm8650_modules_and_devicetree.git
+         cd kernel_oneplus_sm8650_modules_and_devicetree
+         mv kernel_platform ../kernel_platform
+         mv vendor ../kernel_platform
          rm kernel_platform/common/android/abi_gki_protected_exports_* || echo "No protected exports!"
          rm kernel_platform/msm-kernel/android/abi_gki_protected_exports_* || echo "No protected exports!"
          sed -i 's/ -dirty//g' kernel_platform/common/scripts/setlocalversion
