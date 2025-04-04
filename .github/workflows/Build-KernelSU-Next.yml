@@ -148,7 +148,18 @@ jobs:
         run: |
          git clone https://github.com/Kernel-SU/AnyKernel3 --depth=1
          rm -rf ./AnyKernel3/.git
-         cp kernel_workspace/kernel_platform/out/msm-kernel-kailua-gki/dist/Image ./AnyKernel3/
+         echo "所有可能的 Image 文件："
+         find kernel_workspace -type f -name "Image" | grep "gki" || true
+    
+         # 动态复制
+         IMAGE_PATH=$(find kernel_workspace -type f -name "Image" | grep "gki" | head -n 1)
+         if [ -f "$IMAGE_PATH" ]; then
+         echo "最终选中的 Image 文件: $IMAGE_PATH"
+         cp -v "$IMAGE_PATH" ./AnyKernel3/
+         else
+         echo "错误: 未找到包含 gki 的 Image 文件！"
+         exit 1
+         fi   
 
       - name: Upload AnyKernel3
         uses: actions/upload-artifact@v4
