@@ -125,14 +125,12 @@ jobs:
            patch -p1 < 50_add_susfs_in_gki-${{ github.event.inputs.ANDROID_VERSION }}-${{ github.event.inputs.KERNEL_VERSION }}.patch || true
            cp ../../kernel_patches/69_hide_stuff.patch ./
            patch -p1 -F 3 < 69_hide_stuff.patch
-      # ... 前面的步骤保持不变
-
-      - name: Configure Thin LTO in .config
+      - name: Add Swap
         run: |
-         cd kernel_workspace/kernel_platform
-         ./scripts/config --enable CONFIG_LTO_CLANG
-         ./scripts/config --enable CONFIG_LTO_CLANG_THIN
-         make olddefconfig
+         sudo fallocate -l 4G /swapfile
+         sudo chmod 600 /swapfile
+         sudo mkswap /swapfile
+         sudo swapon /swapfile
 
       - name: Build kernel
         run: |
